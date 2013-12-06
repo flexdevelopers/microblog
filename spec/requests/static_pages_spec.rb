@@ -2,52 +2,50 @@ require 'spec_helper'
 
 describe "StaticPages" do
 
-  let(:base_title) { "Ruby on Rails Tutorial Sample App |" }
+  let(:base_title) { "Ruby on Rails Tutorial Sample App" }
 
-  describe "Home Page" do
+  context "Home Page" do
+    before { visit '/static_pages/home' }
     it "should have the content 'Sample App'" do
-      visit '/static_pages/home'
       expect(page).to have_content 'Sample App'
     end
     it "should have the right title" do
-      visit '/static_pages/home'
-      expect(page).to have_title "#{base_title} Home"
+      expect(page).to have_title "#{base_title}"
+    end
+
+    it "should not have a custom title" do
+      expect(page).should_not have_title "|"
+      #should_not have_title "|"
     end
   end
 
-  describe "Help Page" do
+  context "Help Page" do
+    before { visit '/static_pages/help' }
     it "should have the content 'Help'" do
-      visit '/static_pages/help'
       expect(page).to have_content 'Help'
     end
     it "should have the right title" do
-      visit '/static_pages/help'
-      expect(page).to have_title "#{base_title} Help"
+      expect(page).to have_title "#{base_title} | Help"
     end
   end
 
-  describe "About Page" do
+  context "About Page" do
+    before { visit '/static_pages/about' }
     it "should have the content 'About'" do
-      visit '/static_pages/about'
       expect(page).to have_content 'About'
     end
     it "should have the right title" do
-      visit '/static_pages/about'
-      expect(page).to have_title "#{base_title} About"
+      expect(page).to have_title "#{base_title} | About"
     end
   end
 
-  describe "Contact Page" do
-    it "should exist" do
-      visit '/static_pages/contact'
-    end
+  context "Contact Page" do
+    before { visit '/static_pages/contact' }
     it "should have the content 'Contact'" do
-      visit '/static_pages/contact'
       expect(page).to have_content 'Contact'
     end
     it "should have the right title" do
-      visit '/static_pages/contact'
-      expect(page).to have_title "#{base_title} Contact"
+      expect(page).to have_title "#{base_title} | Contact"
     end
   end
 end
